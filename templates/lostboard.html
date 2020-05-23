@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+{% load static %}
+{% block body %}
+<h1>LOST VALUABLES</h1>
+
+{% if articles %}
+
+{% for article in articles %}
+<div class="article-container">
+
+
+
+    <div class="article-user"> 
+        <span class ="article-profile">
+        <img src=" {% static 'img/profile_dummy.png' %}" width="50px" height="50px">
+        </span>
+        {{article.author}}  | <span class="article-type">lost</span> </div>
+        <div class="article-content">
+            <div class="article-title"> {{article.title}}</div>
+            <div> {{article.content}}</div>
+
+        </div>
+        <div  class="article-bottom">
+            <img src=" {% static 'img/heart_empty.svg' %}" width="30px" height="30px"> {{article.get_likes}}
+            <span class="article-claim">Found?</span>
+        </div>
+    
+
+
+
+
+
+
+</div>
+
+
+{%  endfor %}
+
+{% else %}
+
+<div class = "alert alert-danger">
+    You have no articles yet.
+
+</div>
+{% endif %}
+{% endblock body %}
+

@@ -19,9 +19,9 @@ def index(request):
     
 def about(request):
     return render(request,"about.html")
-@login_required(login_url = "user:login")
+# @login_required(login_url = "user:login")
 def dashboard(request):
-    articles = Article.objects.filter(author = request.user)
+    articles = Article.objects.all()
     context = {
         "articles":articles
     }
@@ -39,6 +39,15 @@ def addArticle(request):
         messages.success(request,"Post added successfully")
         return redirect("article:dashboard")
     return render(request,"addarticle.html",{"form":form})
+
+# @login_required(login_url = "user:login")
+# @login_required(login_url = "user:login")
+def lostboard(request):
+    articles = Article.objects.filter(article_type='LST')
+    context = {
+        "articles":articles
+    }
+    return render(request,"lostboard.html",context)
 def detail(request,id):
     #article = Article.objects.filter(id = id).first()   
     article = get_object_or_404(Article,id = id)
