@@ -5,14 +5,14 @@
 
 <div class="row">
     <div class="col-md-6 offset-md-3">
-        <h3>Makale Güncelle</h3>
+        <h3>Edit post</h3>
         <hr>
         <form method = "post" enctype="multipart/form-data">
             {% csrf_token %}
             {{form.media}}
             {{form|crispy}}
             <br>
-            <button type = "submit" class = "btn btn-danger">Makale Güncelle</button>
+            <button type = "submit" class = "btn btn-danger">Edit post</button>
         </form>
     </div>
   </div>

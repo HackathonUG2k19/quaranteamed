@@ -36,7 +36,7 @@ def addArticle(request):
         article.author = request.user
         article.save()
 
-        messages.success(request,"Makale başarıyla oluşturuldu")
+        messages.success(request,"Post added successfully")
         return redirect("article:dashboard")
     return render(request,"addarticle.html",{"form":form})
 def detail(request,id):
@@ -56,7 +56,7 @@ def updateArticle(request,id):
         article.author = request.user
         article.save()
 
-        messages.success(request,"Makale başarıyla güncellendi")
+        messages.success(request,"Post updated successfully")
         return redirect("article:dashboard")
 
 
@@ -67,7 +67,7 @@ def deleteArticle(request,id):
 
     article.delete()
 
-    messages.success(request,"Makale Başarıyla Silindi")
+    messages.success(request,"Post deleted successfully")
 
     return redirect("article:dashboard")
 def addComment(request,id):

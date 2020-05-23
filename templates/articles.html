@@ -6,7 +6,7 @@
     
         <div class="col-md-10 offset-md-3">
             <div class="col-lg-8">
-                <h3>Makaleler</h3>
+                <h3>Articles</h3>
                 <hr>
                 </div>
         </div>
@@ -17,7 +17,7 @@
             <form>
                  {% csrf_token %} 
                 <input type="text" name = "keyword" class="input-sm" maxlength="64" placeholder="Ara...">
-              <button type="submit" class="btn btn-danger">Ara</button>
+              <button type="submit" class="btn btn-danger">See</button>
             </form>
       </div>
     </div>
@@ -40,7 +40,7 @@
       <!-- Author -->
       <p class="lead">
         
-        {{article.author.username}} tarafından yayınlandı
+        Published by {{article.author.username}}
       </p>
 
       <hr>
@@ -61,7 +61,7 @@
           {{article.content|safe|truncatewords:50}}
       </p>
 
-      <a style ="float : right;" href="{% url 'article:detail' article.id %}" class ="btn btn-danger">Devamını Oku</a>
+      <a style ="float : right;" href="{% url 'article:detail' article.id %}" class ="btn btn-danger">See more</a>
       <hr>
          
         </div>
@@ -77,7 +77,7 @@
     <div class="col-md-10 offset-md-3">
         <div class="col-lg-8">
 <div class = "alert alert-danger">
-   Makale Bulunamadı
+   No articles found
 </div>
 </div>
 </div>
