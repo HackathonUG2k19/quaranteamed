@@ -3,17 +3,30 @@
 Clone This Project (Make Sure You Have Git Installed)
 ```
 https://github.com/orientor/lost-found.git
+cd lost-found
+```
+
+Make virtualenv
+```
+pip3 install virtualenv
+virtualenv env
+source env/bin/activate
 ```
 Install Dependencies 
 
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 Set Database (Make Sure you are in directory same as manage.py)
 ```
-python manage.py makemigrations
-python manage.py migrate
+python3 manage.py makemigrations
+python3 manage.py migrate
+```
+
+Run site
+```
+python3 manage.py runserver
 ```
 Create SuperUser 
 ```
