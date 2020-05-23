@@ -1,4 +1,9 @@
-
+!!!!!!!!!!NOTE!!!!!!!!!!!!!!!!!!!!
+PLease use this for updating your local repo
+```
+git remote add orig https://github.com/orientor/lost-found.git
+git pull --rebase orig master
+```
 
 Clone This Project (Make Sure You Have Git Installed)
 ```
