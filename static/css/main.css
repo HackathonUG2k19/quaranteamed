@@ -33,6 +33,13 @@
 
     
 }
+.date{
+    font-size:0.7em;
+}
+.article-profile{
+    float:left;
+    margin-right:20px;
+}
 .article-type{
     color:rgb(83, 83, 83);
 }
@@ -40,7 +47,8 @@
     /* font-size:2em; */
 }
 .article-content{
-    padding-left:50px;
+    margin-top:10px;
+    /* padding-left:50px; */
 }
 .article-title{
     font-weight: bold;
@@ -53,6 +61,7 @@
 }
 .article-bottom{
     /* position: absolute; */
+    margin-top:10px;
     bottom:10px;
 }
 .like-btn{
@@ -64,3 +73,10 @@
 }
 
 
+.profile-image{
+    border-radius: 50%;
+}
+.username{
+    font-family:'Pacifico';
+    font-size:30px;
+}
