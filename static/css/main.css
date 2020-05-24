@@ -6,7 +6,9 @@
     font-family: 'Source Sans Pro';
 
 }
-
+.hidden{
+    display:none;
+}
 
 .xl-container{
         margin-left:20%;
@@ -26,10 +28,21 @@
 }
 .article-container{
     width:100%;
-    background-color: #f1f1f1;
+    background-color: #fafafa;
+    color:rgb(0, 0, 0);
+    padding:2%;
+    margin-bottom:20px;
+    border-left:4px solid rgb(221, 221, 221);
+
+    
+}
+.article-container-comment{
+    width:100%;
+    background-color: #ffffff;
     color:rgb(0, 0, 0);
     padding:2%;
     margin-bottom:10px;
+
 
     
 }
@@ -88,4 +101,10 @@
 }
 html{
     width:100%;
+}
+.notif{
+    border-left:12px solid rgb(39, 39, 39)d;
+    margin-bottom:10px;
+    background-color: rgb(255, 235, 235);
+    padding:10px;
 }

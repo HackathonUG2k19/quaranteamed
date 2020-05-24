@@ -1,56 +1,141 @@
 {% extends "layout.html" %}
-
+{% load static %}
 {% block body %}
-<div class="row">
+<style>
+  .hidden{
+    display:none;
+  }
+</style>
+<div class="article-container">
+    <div class="article-user"> 
 
-    <!-- Post Content Column -->
-    <div class="col-lg-8">
-
-      <!-- Title -->
-      <h3 class="mt-4">{{article.title}}</h3>
-
-      <!-- Author -->
-      <p class="lead">
+        <div class ="article-profile">
+            <a class="links" href="{% url  'user:profile' article.author %}"> 
+            {% if  article.author.profile.image  %}
+           <img src="{{article.author.profile.get_absolute_image_url}}" width="50px" height="50px" style="border-radius:50%">
+            {% else %}
+            <img src=" {% static 'img/profile_dummy.png' %}" width="50px" height="50px"  style="border-radius:50%">
+            {% endif %}
+        </a>
         
-      Post by {{article.author.username}}
-      </p>
+        </div>
+        {{article.author}}  | <span class="article-type">{{article.article_type}}</span> 
 
-      <hr>
+        <div class="date"> {{article.created_date}}</div>
+    </div>
+        <div class="article-content"><a href="{% url 'article:detail' article.id %}" style="text-decoration:none;">
+            <div class="article-title" style="color:black;"> {{article.title}}</div>
+            <div style="color:black;"> {{article.content}}</div>
+        </a>
+        </div>
+        <div  class="article-bottom">
+          {% if article.article_image %}
+          <div><img class="article-image" src="{{article.get_absolute_image_url}}"></div>
+<br/>
+          {% endif %}
+          <div class="footer">            
+             <div>
+                <img class="like like-btn" src=" {% static 'img/heart_filled.svg' %}" width="30px" height="30px" value="{{article.id}}"><span id="like{{article.id}}">{{article.get_likes}}</span>
 
-      <!-- Date/Time -->
-      <p>{{article.created_date}}</p>
+             </div>
+             <div class="filler">
 
-      <hr>
+             </div>
+             <div>
+                <img class="star like-btn" src=" {% static 'img/star.svg' %}" width="30px" height="30px" value="{{article.id}}">
 
-      <!-- Preview Image -->
-      {% if article.article_image %}
-      <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
-      {% endif %}
-     
-
-      <hr>
-
-      <!-- Post Content -->
-      <p class="lead">
-          {{article.content|safe}}
-      </p>
-
-      <hr>
-
-      <h4>Comments</h4>
+                {%  ifequal article.article_type  "request"  %} Bid? {% endifequal %}
+                {%  ifequal article.article_type "found"  %} Claim? {% endifequal %}
+                {%  ifequal article.article_type "lost"  %} Found?{% endifequal %}
+                {%  ifequal article.article_type "sell"  %} Bid? {% endifequal %}
+                {%  ifequal article.article_type "give"  %} Bid? {% endifequal %}
+             </div>
+             
+             </div>
+            
+        </div>
+</div>
+ <img src="{% static 'img/comment.svg' %}" width="30px" height="30px" class="comment-img">
+ <div class="card my-4 hidden" id="coo">
+  <div class="card-body">
+    <form method = "post" action = "{% url 'article:comment' article.id %}">
+      {% csrf_token %}
+      <div class="form-group">
+          <label for="formGroupExampleInput">Comment</label>
+        <textarea name = "comment_content" class="form-control" rows="3"></textarea>
+      </div>
+      <button type="submit" class="btn btn-danger">Add</button>
+    </form>
+  </div>
+</div>
       <hr>
       {% if comments %}
       {% for comment in comments  %}
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+        <!-- <div class="media mb-4">
+          {% if  request.user.profile.image  %}
+          <img class="d-flex mr-3 rounded-circle"  src="{{request.user.profile.get_absolute_image_url}}" width="30px" height="30px" style="border-radius:50%">
+           {% else %}
+           <img class="d-flex mr-3 rounded-circle" src=" {% static 'img/profile_dummy.png' %}" width="30px" height="30px"  style="border-radius:50%">
+           {% endif %}
           <div class="media-body">
             <h5 class="mt-0">{{comment.comment_author}}</h5>
             {{comment.comment_date}} <br>
             {{comment.comment_content}}
           </div>
-        </div>
+        </div> -->
+
+
+
+
+        <div class="article-container-comment">
+          <div class="article-user"> 
+      
+              <div class ="article-profile">
+                  
+                {% if  request.user.profile.image  %}
+                <img class="d-flex mr-3 rounded-circle"  src="{{request.user.profile.get_absolute_image_url}}" width="30px" height="30px" style="border-radius:50%">
+                 {% else %}
+                 <img class="d-flex mr-3 rounded-circle" src=" {% static 'img/profile_dummy.png' %}" width="30px" height="30px"  style="border-radius:50%">
+                 {% endif %}
+              </a>
+              
+              </div>
+              {{comment.comment_author}}
+      
+              <div class="date"> {{comment.comment_date}}</div>
+          </div>
+              <div class="article-content">
+                  <div style="color:black;"> {{comment.comment_content}}</div>
+              
+              </div>
+             
+      </div>
+
+
+
+
+
+
+
+
+
+
+
       {% endfor %}
       
+      
+
+
+
+
+
+
+
+
+
+
+
+
       
       {% else %}
       <div class ="alert alert-danger">
@@ -58,27 +143,26 @@
       </div>
       {% endif %}
 
-      <div class="card my-4">
-          <h5 class="card-header">Add comment:</h5>
-          <div class="card-body">
-            <form method = "post" action = "{% url 'article:comment' article.id %}">
-              {% csrf_token %}
-              <div class="form-group">
-                  <label for="formGroupExampleInput">Name</label>
-                  <input name = "comment_author" type="text" class="form-control" id="formGroupExampleInput">
-                </div>
-              <div class="form-group">
-                  <label for="formGroupExampleInput">Comment</label>
-                <textarea name = "comment_content" class="form-control" rows="3"></textarea>
-              </div>
-              <button type="submit" class="btn btn-danger">Add</button>
-            </form>
-          </div>
-        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+     
         </div>
         
-      </div>
+      </div> 
 
       
 
 {% endblock body %}
+<script>
+
+</script>

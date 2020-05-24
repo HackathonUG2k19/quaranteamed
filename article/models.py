@@ -40,7 +40,7 @@ class Article(models.Model):
         ordering = ['-created_date']
 class Comment(models.Model):
     article = models.ForeignKey(Article,on_delete = models.CASCADE,verbose_name = "Article",related_name="comments")
-    comment_author = models.CharField(max_length = 50,verbose_name = "Author")
+    comment_author = models.ForeignKey("auth.User",on_delete=models.CASCADE,verbose_name = "Author")
     comment_content = models.CharField(max_length = 200,verbose_name = "Comment")
     comment_date = models.DateTimeField(auto_now_add=True)
     def __str__(self):

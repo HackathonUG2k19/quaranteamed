@@ -75,6 +75,15 @@ body {margin:0;font-family:Arial}
     text-align: left;
   }
 }
+.sm-circle{
+  width:10px;
+  height:10px;
+  background-color: rgb(0, 231, 39);
+  position:absolute;
+  border:2px solid white;
+  border-radius:50%;
+  transform: translate(22px,22px);
+}
 </style>
 <div class="topnav" id="myTopnav">
   <a href="{% url 'article:articles'  %}" class="heading">CollegeStuff</a>
@@ -84,7 +93,7 @@ body {margin:0;font-family:Arial}
   <a class="links" href="{% url 'user:logout'  %}">Logout</a>
 
   <a class="links" href="{% url  'user:profile' request.user %}"> 
-
+<div  class="sm-circle"></div>
     {% if  request.user.profile.image  %}
    <img src="{{request.user.profile.get_absolute_image_url}}" width="30px" height="30px" style="border-radius:50%">
     {% else %}
