@@ -1,44 +1,32 @@
 from django.db import models
+from  django.conf import settings
 # Create your models here.
-
-CHOICES = (
-    ('lost','LOST'),
-    ('found', 'FOUND'),
-    ('request','REQUEST'),
-    ('sell','SELL'),
-    ('giveaway','GIVEAWAY'),
+TYPE_OPTIONS=(
+    ('lost','lost'),
+    ('found','found'),
+    ('sell','sell'),
+    ('give','give_away'),
+    ('request','request'),
 )
 class Article(models.Model):
     author = models.ForeignKey("auth.User",on_delete = models.CASCADE,verbose_name = "Author")
     title = models.CharField(max_length = 50,verbose_name = "Title")
     content = models.TextField()
-    article_type = models.CharField(max_length=15, choices=CHOICES, default= "LOST", verbose_name="Type")
     created_date = models.DateTimeField(auto_now_add=True,verbose_name="Created Date")
     article_image = models.FileField(blank = True,null = True,verbose_name="Image")
+    article_type = models.CharField(max_length=10,choices=TYPE_OPTIONS,default='request')
+    resolved = models.BooleanField(default = False)
+    deadline = models.DateTimeField(default=None,null=True)
+    def get_likes(self):
+        return self.like_set.count()
+    def get_absolute_image_url(self):
+        # return "{0}{1}".format(settings.MEDIA_URL, self.article_image.url)
+        return self.article_image.url
     def __str__(self):
         return self.title
     
     class Meta:
         ordering = ['-created_date']
-
-class LostArticle(Article):
-    found = models.BooleanField(default=False, verbose_name="Found")
-
-class FoundArticle(Article):
-    claimed = models.BooleanField(default=False, verbose_name="Claimed")
-
-class RequestArticle(Article):
-    approvals = models.ManyToManyField("auth.User",verbose_name="appprovals")
-
-class SellArticle(Article):
-    base_price = models.IntegerField(verbose_name="Baseprice")
-    claimed = models.BooleanField(default=False)
-    highest_claimed_price=models.IntegerField(default=None)
-    highest_claimant  = models.ForeignKey("auth.User",on_delete=models.PROTECT,verbose_name="Hclaim")
-    deadline =models.DateTimeField(verbose_name = "deadline")
-class GiveAwayArticle(Article):
-    approvals = models.ManyToManyField("auth.User",verbose_name="appprovals")
-    deadline =models.DateTimeField()
 class Comment(models.Model):
     article = models.ForeignKey(Article,on_delete = models.CASCADE,verbose_name = "Article",related_name="comments")
     comment_author = models.CharField(max_length = 50,verbose_name = "Author")
@@ -48,3 +36,11 @@ class Comment(models.Model):
         return self.comment_content
     class Meta:
         ordering = ['-comment_date']
+class Like(models.Model):
+    article = models.ForeignKey(Article,on_delete=models.CASCADE)
+    user = models.ForeignKey("auth.User",on_delete=models.CASCADE)
+
+class Bid(models.Model):
+    user = models.ForeignKey("auth.User",on_delete=models.CASCADE)
+    article =  models.ForeignKey(Article,on_delete=models.CASCADE)
+    value = models.IntegerField(default=None, null=True)

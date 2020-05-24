@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Sigmar+One&display=swap');
+*{
+    margin:0px;
+    font-family: 'Source Sans Pro';
+
+}
+
+
+.xl-container{
+        margin-left:20%;
+        margin-right:20%;
+    }
+ 
+@media screen and (max-width: 600px){
+    .xl-container{
+        margin-left:0%;
+        margin-right:0%;
+    }
+}
+.addart{
+    position: fixed;
+    bottom:15px;
+    right:15px;
+}
+.article-container{
+    width:100%;
+    background-color: #f1f1f1;
+    color:rgb(0, 0, 0);
+    padding:2%;
+    margin-bottom:10px;
+
+    
+}
+.article-type{
+    color:rgb(83, 83, 83);
+}
+.article-user{
+    /* font-size:2em; */
+}
+.article-content{
+    padding-left:50px;
+}
+.article-title{
+    font-weight: bold;
+}
+.article-claim{
+    /* position:absolute; */
+    /* right:10px; */
+    color:rgb(5, 211, 5);
+    padding-left:20px;
+}
+.article-bottom{
+    /* position: absolute; */
+    bottom:10px;
+}
+.like-btn{
+    filter: invert(78%) sepia(2%) saturate(45%) hue-rotate(12deg) brightness(101%) contrast(103%);
+
+}
+.article-image{
+    width:100%;
+}
+
+
