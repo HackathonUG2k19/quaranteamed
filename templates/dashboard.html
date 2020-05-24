@@ -5,7 +5,7 @@
 <hr>
 
 
-<a class = "btn btn-danger" href = "{% url 'article:addarticle' %}">Add Article </a>
+<a class = "btn btn-primary" href = "{% url 'article:addarticle' %}">Add Article </a>
 <hr>
 {% if articles %}
 <!-- <table class="table"> -->
@@ -33,21 +33,21 @@
           <div class="card-deck " >
            
             <div class="card bg-light mb-3" style="max-width: 60rem;">
-              <div class="card-header">{{article.title}}</div>
+              <div class="card-header" style="text-transform: uppercase;">{{article.title}}</div>
               <div class="card-body">
                 <!-- <h5 class="card-title">Light card title</h5> -->
                 <p class="card-text ">{{article.content}}</p>
-                <a href="{% url 'article:update' article.id %}" class = "btn btn-warning" style="position: absolute; right:100px; bottom:1px;">Edit</a>
+                <a href="{% url 'article:update' article.id %}" class = "btn btn-warning" style="position: absolute; right:90px; bottom:1px;">Edit</a>
                 <a href="{% url 'article:delete' article.id %}" class = "btn btn-danger" style="position: absolute; right:5px; bottom:1px;">Delete</a>
               </div>
             </div>
 
               <div class="card bg-light mb-3" style="max-width: 60rem; min-height: 10rem;max-height: 17rem;">
-                <div class="card-header">{{article.title}}</div>
+              <div class="card-header" style="text-transform: uppercase;">{{article.title}}</div>
                 <div class="card-body">
                   <!-- <h5 class="card-title">Light card title</h5> -->
                   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                  <a href="{% url 'article:update' article.id %}" class = "btn btn-warning" style="position: absolute; right:100px; bottom:1px;">Edit</a>
+                  <a href="{% url 'article:update' article.id %}" class = "btn btn-warning" style="position: absolute; right:90px; bottom:1px;">Edit</a>
                   <a href="{% url 'article:delete' article.id %}" class = "btn btn-danger" style="position: absolute; right:5px; bottom:1px;">Delete</a>
                 </div>
             </div>
