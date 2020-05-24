@@ -105,6 +105,7 @@ def like(request):
 
     else:
         return HttpResponse('failed')
+@login_required
 def liked(request):
     if request.method=='GET':
         post_id = request.GET['post_id']
