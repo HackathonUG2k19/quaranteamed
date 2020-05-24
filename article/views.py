@@ -94,13 +94,27 @@ def like(request):
     if request.method=='GET':
         post_id = request.GET['post_id']
         likedpost = Article.objects.get(id=post_id)
-        if  Like.objects.get(article=likedpost):
-            Like.objects.filter(article=likedpost).delete()
-            return HttpResponse('removed')
+        print(Like.objects.filter(article=likedpost,user=request.user).count())
+        if  Like.objects.filter(article=likedpost,user=request.user).count()==1:
+            Like.objects.filter(article=likedpost,user=request.user).delete()
+            return HttpResponse(likedpost.like_set.count())
         else:
-            pass
-            m=Like(post=likedpost)
+            m=Like(user=request.user,article=likedpost)
             m.save()
-            return HttpResponse('added')
+            return HttpResponse(likedpost.like_set.count())
+
+    else:
+        return HttpResponse('failed')
+@login_required
+def liked(request):
+    if request.method=='GET':
+        post_id = request.GET['post_id']
+        likedpost = Article.objects.get(id=post_id)
+        c  = Like.objects.filter(user=request.user,article=likedpost).count()
+        if  c==1:
+            return HttpResponse(1)
+        else:
+            return HttpResponse(0)
+
     else:
         return HttpResponse('failed')

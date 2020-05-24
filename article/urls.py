@@ -18,4 +18,5 @@ urlpatterns = [
     path('comment/<int:id>',views.addComment,name = "comment"),
     path('type/<str:art_type>/',views.typeview,  name="type"),
     path('like/',views.like,name="like"),
+    path('liked/',views.liked,name="liked"),
 ]

@@ -8,10 +8,21 @@
 {% for article in articles %}
 <div class="article-container">
     <div class="article-user"> 
-        <span class ="article-profile">
-        <img src=" {% static 'img/profile_dummy.png' %}" width="50px" height="50px">
-        </span>
-        {{article.author}}  | <span class="article-type">{{article.article_type}}</span> </div>
+
+        <div class ="article-profile">
+            <a class="links" href="{% url  'user:profile' article.author %}"> 
+            {% if  article.author.profile.image  %}
+           <img src="{{article.author.profile.get_absolute_image_url}}" width="50px" height="50px" style="border-radius:50%">
+            {% else %}
+            <img src=" {% static 'img/profile_dummy.png' %}" width="50px" height="50px"  style="border-radius:50%">
+            {% endif %}
+        </a>
+        
+        </div>
+        {{article.author}}  | <span class="article-type">{{article.article_type}}</span> 
+
+        <div class="date"> {{article.created_date}}</div>
+    </div>
         <div class="article-content">
             <div class="article-title"> {{article.title}}</div>
             <div> {{article.content}}</div>
@@ -22,10 +33,26 @@
           <div><img class="article-image" src="{{article.get_absolute_image_url}}"></div>
 <br/>
           {% endif %}
-             <!-- <img class="like-btn-empty" style="display:none;" src=" {% static 'img/heart_empty.svg' %}" width="30px" height="30px"> -->
-             <img class="like like-btn" src=" {% static 'img/heart_filled.svg' %}" width="30px" height="30px">
-             {{article.get_likes}}
-            <span class="article-claim">Found?</span>
+          <div class="footer">            
+             <div>
+                <img class="like like-btn" src=" {% static 'img/heart_filled.svg' %}" width="30px" height="30px" value="{{article.id}}"><span id="like{{article.id}}">{{article.get_likes}}</span>
+
+             </div>
+             <div class="filler">
+
+             </div>
+             <div>
+                <img class="star like-btn" src=" {% static 'img/star.svg' %}" width="30px" height="30px" value="{{article.id}}">
+
+                {%  ifequal article.article_type  "request"  %} Bid {% endifequal %}
+                {%  ifequal article.article_type "found"  %} Claim {% endifequal %}
+                {%  ifequal article.article_type "lost"  %} Found {% endifequal %}
+                {%  ifequal article.article_type "sell"  %} Bid {% endifequal %}
+                {%  ifequal article.article_type "give"  %} Bid {% endifequal %}
+             </div>
+             
+             </div>
+            
         </div>
 </div>
 
