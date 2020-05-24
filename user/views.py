@@ -56,3 +56,5 @@ def logoutUser(request):
     messages.success(request,"Successfully logged out")
     return redirect("index")
 
+def  profile(request, name):
+    pass

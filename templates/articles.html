@@ -1,7 +1,10 @@
 {% extends "layout.html" %}
+{% load static %}
 
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
 {% block body %}
 
+<!-- 
 <div class ="row">
     
         <div class="col-md-10 offset-md-3">
@@ -20,68 +23,47 @@
               <button type="submit" class="btn btn-danger">See</button>
             </form>
       </div>
-    </div>
+    </div> -->
 
-</div>
+<!-- </div> -->
 
 
 {% if articles %}
 
 {% for article in articles %}
-<div class="row">
-    <div class="col-md-10 offset-md-3">
+<div class="article-container">
+    <div class="article-user"> 
+        <span class ="article-profile">
+        <img src=" {% static 'img/profile_dummy.png' %}" width="50px" height="50px">
+        </span>
+        {{article.author}}  | <span class="article-type">{{article.article_type}}</span> </div>
+        <div class="article-content">
+            <div class="article-title"> {{article.title}}</div>
+            <div> {{article.content}}</div>
 
-    <!-- Post Content Column -->
-    <div class="col-lg-8">
-
-      <!-- Title -->
-      <a href="{% url 'article:detail' article.id %}"><h2 class="mt-4">{{article.title}}</h2></a> 
-        
-      <!-- Author -->
-      <p class="lead">
-        
-        Published by {{article.author.username}}
-      </p>
-
-      <hr>
-
-      <!-- Date/Time -->
-      <p>{{article.created_date}}</p>
-      <hr>
-      <!-- Preview Image -->
-      {% if article.article_image %}
-      <a href="{% url 'article:detail' article.id %}"><img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""></a>
-      {% endif %}
-     
-
-      <hr>
-
-      <!-- Post Content -->
-      <p class="lead">
-          {{article.content|safe|truncatewords:50}}
-      </p>
-
-      <a style ="float : right;" href="{% url 'article:detail' article.id %}" class ="btn btn-danger">See more</a>
-      <hr>
-         
         </div>
-      </div>
-      </div>
+        <div  class="article-bottom">
+          {% if article.article_image %}
+          <div><img class="article-image" src="{{article.get_absolute_image_url}}"></div>
+<br/>
+          {% endif %}
+             <!-- <img class="like-btn-empty" style="display:none;" src=" {% static 'img/heart_empty.svg' %}" width="30px" height="30px"> -->
+             <img class="like like-btn" src=" {% static 'img/heart_filled.svg' %}" width="30px" height="30px">
+             {{article.get_likes}}
+            <span class="article-claim">Found?</span>
+        </div>
+</div>
 
-{% endfor %}
 
+{%  endfor %}
 
 {% else %}
-<div class ="row">
-    
-    <div class="col-md-10 offset-md-3">
-        <div class="col-lg-8">
+
 <div class = "alert alert-danger">
-   No articles found
-</div>
-</div>
-</div>
+    You have no articles yet.
+
 </div>
 {% endif %}
+
 
 {% endblock body %}

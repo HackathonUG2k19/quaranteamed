@@ -1,0 +1,37 @@
+<style>
+.kl-container>a{
+    padding:5px 25px;
+    background-color: azure;
+    color:black;
+    border: 2px solid black;
+    border-radius:10px;
+    margin-left:30px;
+    margin-top:5px;
+}
+.kl-container{
+    position:relative;
+    display:flex;
+    top:50px;
+    flex-wrap:wrap;
+    text-align:center;
+    /* margin:20%; */
+    width:100%;
+    /* font-size:1.4em; */
+}
+@media screen and (min-width: 600px){
+    .kl-container{
+        margin-left:20%;
+    }
+}
+
+</style>
+<div class="kl-container">
+    <a class="nav-link" href="{% url 'article:articles'  %}"><div class="kl-obj">All</div></a>
+    <!-- <div class="kl-obj">All</div> -->
+    <a class="nav-link" href="{% url 'article:lostboard'  %}"><div class="kl-obj">Lost</div></a>
+    <a class="nav-link" href="{% url 'article:foundboard'  %}"><div class="kl-obj">Found</div></a>
+    <a class="nav-link" href="{% url 'article:reqboard'  %}"><div class="kl-obj">Requests</div></a>
+    <a class="nav-link" href="{% url 'article:giveboard'  %}"><div class="kl-obj">Give Aways</div></a>
+    <a class="nav-link" href="{% url 'article:sellboard'  %}"><div class="kl-obj">Sell</div></a>
+  
+</div>

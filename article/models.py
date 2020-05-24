@@ -1,4 +1,5 @@
 from django.db import models
+from  django.conf import settings
 # Create your models here.
 TYPE_OPTIONS=(
     ('LST','lost'),
@@ -18,6 +19,9 @@ class Article(models.Model):
     deadline = models.DateTimeField(default=None,null=True)
     def get_likes(self):
         return self.like_set.count()
+    def get_absolute_image_url(self):
+        # return "{0}{1}".format(settings.MEDIA_URL, self.article_image.url)
+        return self.article_image.url
     def __str__(self):
         return self.title
     

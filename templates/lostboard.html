@@ -1,36 +1,32 @@
 {% extends "layout.html" %}
 {% load static %}
 {% block body %}
-<h1>LOST VALUABLES</h1>
+<h1>{{article_type}}</h1>
 
 {% if articles %}
 
 {% for article in articles %}
 <div class="article-container">
-
-
-
     <div class="article-user"> 
         <span class ="article-profile">
         <img src=" {% static 'img/profile_dummy.png' %}" width="50px" height="50px">
         </span>
-        {{article.author}}  | <span class="article-type">lost</span> </div>
+        {{article.author}}  | <span class="article-type">{{article.article_type}}</span> </div>
         <div class="article-content">
             <div class="article-title"> {{article.title}}</div>
             <div> {{article.content}}</div>
 
         </div>
         <div  class="article-bottom">
-            <img src=" {% static 'img/heart_empty.svg' %}" width="30px" height="30px"> {{article.get_likes}}
+          {% if article.article_image %}
+          <div><img class="article-image" src="{{article.get_absolute_image_url}}"></div>
+<br/>
+          {% endif %}
+             <!-- <img class="like-btn-empty" style="display:none;" src=" {% static 'img/heart_empty.svg' %}" width="30px" height="30px"> -->
+             <img class="like like-btn" src=" {% static 'img/heart_filled.svg' %}" width="30px" height="30px">
+             {{article.get_likes}}
             <span class="article-claim">Found?</span>
         </div>
-    
-
-
-
-
-
-
 </div>
 
 
@@ -43,5 +39,6 @@
 
 </div>
 {% endif %}
+
 {% endblock body %}
 
