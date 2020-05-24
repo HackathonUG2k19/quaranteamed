@@ -19,4 +19,5 @@ urlpatterns = [
     path('type/<str:art_type>/',views.typeview,  name="type"),
     path('like/',views.like,name="like"),
     path('liked/',views.liked,name="liked"),
+    path('joinGiveaway/', views.join_giveaway, name="joinGiveaway")
 ]

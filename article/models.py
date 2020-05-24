@@ -1,7 +1,7 @@
 from django.db import models
 from  django.conf import settings
 from django.db.models import Max
-
+from django.contrib.auth.models import User
 # Find the maximum value of the rating and then get the record with that rating. 
 # Notice the double underscores in rating__max
 
@@ -22,6 +22,7 @@ class Article(models.Model):
     article_type = models.CharField(max_length=10,choices=TYPE_OPTIONS,default='request')
     resolved = models.BooleanField(default = False)
     deadline = models.DateTimeField(default=None,null=True)
+    winner = models.IntegerField(default=-1)
     def get_likes(self):
         return self.like_set.count()
     def get_absolute_image_url(self):
@@ -52,6 +53,6 @@ class Like(models.Model):
     user = models.ForeignKey("auth.User",on_delete=models.CASCADE)
 
 class Bid(models.Model):
-    user = models.ForeignKey("auth.User",on_delete=models.CASCADE)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
     article =  models.ForeignKey(Article,on_delete=models.CASCADE)
     value = models.IntegerField(default=None, null=True)

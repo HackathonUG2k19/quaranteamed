@@ -48,9 +48,15 @@
 
                 {%  ifequal article.article_type  "request"  %} Bid? {% endifequal %}
                 {%  ifequal article.article_type "found"  %} Claim? {% endifequal %}
-                {%  ifequal article.article_type "lost"  %} Found?{% endifequal %}
+                {%  ifequal article.article_type "lost"  %} Found? {% endifequal %}
                 {%  ifequal article.article_type "sell"  %} Bid? {% endifequal %}
-                {%  ifequal article.article_type "give"  %} Bid? {% endifequal %}
+                {%  ifequal article.article_type "give"  %}
+				{% if article.joined == False %}
+				<button onclick="$.get('/articles/joinGiveaway/', {user_id: '{{article.author.profile.id}}', article_id: '{{article.id}}'}, function(result){alert(`Added to the Lottery`);});">Join</button> 
+				{% else %}
+				Joined
+				{%endif%}
+				{% endifequal %}
              </div>
              
              </div>
@@ -72,5 +78,5 @@
 
 {% endblock body %}
 <script>
-
+function myFunction() {
 </script>
