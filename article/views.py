@@ -1,6 +1,6 @@
 from django.shortcuts import render,HttpResponse,redirect,get_object_or_404,reverse
 from .forms import ArticleForm
-from .models import Article,Comment
+from .models import Article,Comment,Like,Bid
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # Create your views here.
@@ -89,4 +89,18 @@ def addComment(request,id):
 
         newComment.save()
     return redirect(reverse("article:detail",kwargs={"id":id}))
-    
+@login_required
+def like(request):
+    if request.method=='GET':
+        post_id = request.GET['post_id']
+        likedpost = Article.objects.get(id=post_id)
+        if  Like.objects.get(article=likedpost):
+            Like.objects.filter(article=likedpost).delete()
+            return HttpResponse('removed')
+        else:
+            pass
+            m=Like(post=likedpost)
+            m.save()
+            return HttpResponse('added')
+    else:
+        return HttpResponse('failed')
