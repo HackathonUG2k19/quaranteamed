@@ -81,12 +81,6 @@ body {margin:0;font-family:Arial}
 
 
   {% if request.user.is_authenticated %}
-  {%  if  request.user.profile.image %}
-  <a class="links" href="{% url  'user:profile' request.user.username %}"> <img src="{{request.user.profile.get_absolute_image_url}}" width="30px" height="30px" style="border-radius:50%;"></a>
-  {% else %}
-  <a class="links" href="{% url  'user:profile' request.user.username %}"> <img src=" {% static 'img/profile_dummy.png' %}" width="30px" height="30px"></a>
-  {% endif %}
-  <a class="links" href="{% url  'user:profile' '{{request.user}}' %}"> <img src=" {% static 'img/bell.svg' %}" width="30px" height="30px"></a>
   <a class="links" href="{% url 'user:logout'  %}">Logout</a>
   {% else %}
   <a class="links" href="{% url 'user:login'  %}">Login</a>
