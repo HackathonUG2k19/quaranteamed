@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+{% load static %}
+<style>
+     .profile-image{
+        border-radius: 50%;
+    }
+    .username{
+        font-family:'Pacifico';
+        font-size:30px;
+    }
+</style>
+{% block body %}
+<div class="username" style="font-family:'Pacifico';font-size:40px;">{{profile.user}}</div>
+{% if profile.image %}
+<img class="profile-image" src="{{profile.get_absolute_image_url}}" style="border-radius:50%;" width="200px" height="200px">
+{% else %}
+<img class="profile-image" src="{% static 'img/profile_dummy.png' %}" style="border-radius:50%;" width="200px" height="200px">
+{% endif %}
+{% endblock body %}
+

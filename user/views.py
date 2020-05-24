@@ -1,11 +1,10 @@
-from django.shortcuts import render,redirect
+
 from .forms import RegisterForm,LoginForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
-
-
-
+from django.shortcuts import render,HttpResponse,redirect,get_object_or_404,reverse
+from .models  import Profile, Notif
 # Create your views here.
 
 def register(request):
@@ -18,7 +17,10 @@ def register(request):
         newUser = User(username =username)
         newUser.set_password(password)
 
+
         newUser.save()
+        new_profile = Profile(user=newUser)
+        new_profile.save()
         login(request,newUser)
         messages.info(request,"Registered Successfully")
 
@@ -57,4 +59,10 @@ def logoutUser(request):
     return redirect("index")
 
 def  profile(request, name):
-    pass
+    obj = get_object_or_404(User,username=name)
+    prof= get_object_or_404(Profile, user=obj)
+    context={
+        "profile":prof
+    }
+    return render(request,"profile.html",context)
+
