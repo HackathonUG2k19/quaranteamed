@@ -2,10 +2,13 @@
 from .forms import RegisterForm,LoginForm
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import login,authenticate,logout,update_session_auth_hash
-from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import login,authenticate,logout
 from django.shortcuts import render,HttpResponse,redirect,get_object_or_404,reverse
 from .models  import Profile, Notif
+
+from django.contrib.auth import login,authenticate,logout,update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
 # Create your views here.
 
 def register(request):

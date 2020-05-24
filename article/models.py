@@ -1,5 +1,10 @@
 from django.db import models
 from  django.conf import settings
+from django.db.models import Max
+
+# Find the maximum value of the rating and then get the record with that rating. 
+# Notice the double underscores in rating__max
+
 # Create your models here.
 TYPE_OPTIONS=(
     ('lost','lost'),
@@ -22,6 +27,12 @@ class Article(models.Model):
     def get_absolute_image_url(self):
         # return "{0}{1}".format(settings.MEDIA_URL, self.article_image.url)
         return self.article_image.url
+    def get_number_of_bidders(self):
+        return self.bid_set.count()
+    def get_hightest_bidder(self):
+        max_value = self.bid_set.aggregate(Max('value'))['value__max']
+        return self.bid_set.get(value=max_value)
+        # return self.bid_set
     def __str__(self):
         return self.title
     

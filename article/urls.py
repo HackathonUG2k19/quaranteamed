@@ -17,5 +17,5 @@ urlpatterns = [
     path('',views.articles,name = "articles"),
     path('comment/<int:id>',views.addComment,name = "comment"),
     path('type/<str:art_type>/',views.typeview,  name="type"),
-    
+    path('like/',views.like,name="like"),
 ]
