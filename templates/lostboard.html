@@ -35,8 +35,8 @@
           {% endif %}
           <div class="footer">            
              <div>
-                <img class="like like-btn" src=" {% static 'img/heart_filled.svg' %}" width="30px" height="30px" value="{{article.id}}">
-                {{article.get_likes}}
+                <img class="like like-btn" src=" {% static 'img/heart_filled.svg' %}" width="30px" height="30px" value="{{article.id}}"><span id="like{{article.id}}">{{article.get_likes}}</span>
+
              </div>
              <div class="filler">
 
