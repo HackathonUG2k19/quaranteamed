@@ -9,5 +9,7 @@ urlpatterns = [
     path('login/',views.loginUser,name = "login"),
     path('logout/',views.logoutUser,name = "logout"),
     path('settings/',views.settingUser,name = "settings"),
-    path('<str:name>/profile/',views.profile,name="profile")
+    path('<str:name>/profile/',views.profile,name="profile"),
+    path('notifs/',views.notifications,name="notifs"),
+    path('editprofile',views.editprofile,name="editprofile"),
 ]

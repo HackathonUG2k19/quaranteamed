@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+{% load static %}
+<style>
+    
+</style>
+{% block body %}
+{% for notif in notifs %}
+<div>
+    <a href="{% url  'user:profile' notif.user_sender %}"> {{notif.user_sender}}</a>{{notif.statement}} you
+</div>
+
+{% endfor %}
+{% endblock body %}
+

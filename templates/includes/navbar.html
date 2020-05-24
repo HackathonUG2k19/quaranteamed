@@ -92,7 +92,7 @@ body {margin:0;font-family:Arial}
     {% endif %}
 </a>
 
-<a class="links" href="{% url  'user:profile' request.user %}"><img src=" {% static 'img/bell.svg' %}" width="30px" height="30px"> </a>
+<a class="links" href="{% url  'user:notifs'  %}"><img src=" {% static 'img/bell.svg' %}" width="30px" height="30px"> </a>
 
   {% else %}
   <a class="links" href="{% url 'user:login'  %}">Login</a>

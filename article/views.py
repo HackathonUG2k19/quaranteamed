@@ -3,6 +3,7 @@ from .forms import ArticleForm
 from .models import Article,Comment,Like,Bid
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from user.models import Notif
 # Create your views here.
 
 def articles(request):
@@ -97,6 +98,8 @@ def like(request):
         print(Like.objects.filter(article=likedpost,user=request.user).count())
         if  Like.objects.filter(article=likedpost,user=request.user).count()==1:
             Like.objects.filter(article=likedpost,user=request.user).delete()
+            n = Notif(user_sender=request.user,user_reciever=likedpost.author,statement=f' liked the post {likedpost.title} of ')
+            n.save()
             return HttpResponse(likedpost.like_set.count())
         else:
             m=Like(user=request.user,article=likedpost)

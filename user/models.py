@@ -12,4 +12,5 @@ class Notif(models.Model):
     user_sender = models.ForeignKey("auth.User", on_delete=models.PROTECT, null=True, related_name="sender")
     statement = models.CharField(max_length=100, default="notified")
     created_date = models.DateTimeField(auto_now_add=True,verbose_name="Created Date",null=True)
+    seen = models.BooleanField(default=False)
 
