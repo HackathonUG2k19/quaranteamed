@@ -25,10 +25,10 @@
 
         <div class="date"> {{article.created_date}}</div>
     </div>
-        <div class="article-content">
-            <div class="article-title"> {{article.title}}</div>
-            <div> {{article.content}}</div>
-
+        <div class="article-content"><a href="{% url 'article:detail' article.id %}" style="text-decoration:none;">
+            <div class="article-title" style="color:black;"> {{article.title}}</div>
+            <div style="color:black;"> {{article.content}}</div>
+        </a>
         </div>
         <div  class="article-bottom">
           {% if article.article_image %}
@@ -46,11 +46,11 @@
              <div>
                 <img class="star like-btn" src=" {% static 'img/star.svg' %}" width="30px" height="30px" value="{{article.id}}">
 
-                {%  ifequal article.article_type  "request"  %} Bid {% endifequal %}
-                {%  ifequal article.article_type "found"  %} Claim {% endifequal %}
-                {%  ifequal article.article_type "lost"  %} Found {% endifequal %}
-                {%  ifequal article.article_type "sell"  %} Bid {% endifequal %}
-                {%  ifequal article.article_type "give"  %} Bid {% endifequal %}
+                {%  ifequal article.article_type  "request"  %} Bid? {% endifequal %}
+                {%  ifequal article.article_type "found"  %} Claim? {% endifequal %}
+                {%  ifequal article.article_type "lost"  %} Found?{% endifequal %}
+                {%  ifequal article.article_type "sell"  %} Bid? {% endifequal %}
+                {%  ifequal article.article_type "give"  %} Bid? {% endifequal %}
              </div>
              
              </div>

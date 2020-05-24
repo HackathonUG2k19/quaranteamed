@@ -6,7 +6,9 @@
     font-family: 'Source Sans Pro';
 
 }
-
+.hidden{
+    display:none;
+}
 
 .xl-container{
         margin-left:20%;
@@ -31,6 +33,16 @@
     padding:2%;
     margin-bottom:20px;
     border-left:4px solid rgb(221, 221, 221);
+
+    
+}
+.article-container-comment{
+    width:100%;
+    background-color: #ffffff;
+    color:rgb(0, 0, 0);
+    padding:2%;
+    margin-bottom:10px;
+
 
     
 }

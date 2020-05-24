@@ -43,3 +43,8 @@ $(document).ready(function(){
     })
 
 });
+$('.comment-img').click(function(){
+    console.log("clicked");
+    $('#coo').toggleClass("hidden");
+
+  });
