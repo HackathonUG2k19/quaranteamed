@@ -89,7 +89,7 @@ def settingUser(request):
     return redirect("index")
 @login_required
 def notifications(request):
-    notifs = Notif.objects.filter(user_reciever = request.user)
+    notifs = Notif.objects.filter(user_reciever = request.user).reverse()
     context ={
         'notifs':notifs
     }

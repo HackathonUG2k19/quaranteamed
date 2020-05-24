@@ -1,11 +1,18 @@
 {% extends "layout.html" %}
 {% load static %}
 <style>
-    
+    .notif{
+        border-left:12px solid rgb(39, 39, 39)d;
+        margin-bottom:10px;
+        background-color: rgb(255, 235, 235);
+        padding:10px;
+    }
 </style>
 {% block body %}
+
 {% for notif in notifs %}
-<div>
+
+<div class="notif">
     <a href="{% url  'user:profile' notif.user_sender %}"> {{notif.user_sender}}</a>{{notif.statement}} you
 </div>
 
