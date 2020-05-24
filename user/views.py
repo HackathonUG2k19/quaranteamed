@@ -5,6 +5,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
 from django.shortcuts import render,HttpResponse,redirect,get_object_or_404,reverse
 from .models  import Profile, Notif
+
+from django.contrib.auth import login,authenticate,logout,update_session_auth_hash
+from django.contrib.auth.forms import PasswordChangeForm
+
 # Create your views here.
 
 def register(request):
@@ -65,4 +69,20 @@ def  profile(request, name):
         "profile":prof
     }
     return render(request,"profile.html",context)
+
+def settingUser(request):
+    if request.user.is_authenticated:
+        form = None
+        if request.method == "POST":
+            form=PasswordChangeForm(request.user, request.POST)
+            if form.is_valid():
+                # user = form.save()
+                update_session_auth_hash(request,form.request.user)
+        user_info = User(user=request.user)
+        context = { 'user_info' : user_info,
+                    'form' : form }
+        messages.success(request,"Password successfully changed")
+        return render(request,"dashboard.html",context)
+
+    return redirect("index")
 

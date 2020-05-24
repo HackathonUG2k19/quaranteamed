@@ -8,6 +8,5 @@ urlpatterns = [
     path('register/',views.register,name = "register"),
     path('login/',views.loginUser,name = "login"),
     path('logout/',views.logoutUser,name = "logout"),
-    path('<str:name>/profile/',views.profile,name="profile"),
-
+    path('settings/',views.settingUser,name = "settings"),
 ]
