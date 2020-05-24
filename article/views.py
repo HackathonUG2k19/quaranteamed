@@ -19,13 +19,19 @@ def index(request):
     
 def about(request):
     return render(request,"about.html")
-@login_required(login_url = "user:login")
+# @login_required(login_url = "user:login")
 def dashboard(request):
     articles = Article.objects.filter(author = request.user)
     context = {
         "articles":articles
     }
     return render(request,"dashboard.html",context)
+def typeview(request, art_type):
+    articles = Article.objects.filter(article_type=art_type)
+    context = {
+        "articles":articles, "article_type":art_type
+    }
+    return render(request,"lostboard.html",context)
 @login_required(login_url = "user:login")
 def addArticle(request):
     form = ArticleForm(request.POST or None,request.FILES or None)
@@ -39,6 +45,39 @@ def addArticle(request):
         messages.success(request,"Post added successfully")
         return redirect("article:dashboard")
     return render(request,"addarticle.html",{"form":form})
+
+# @login_required(login_url = "user:login")
+# @login_required(login_url = "user:login")
+# def lostboard(request):
+#     articles = Article.objects.filter(article_type='LST')
+#     context = {
+#         "articles":articles, "article_type":"lost"
+#     }
+#     return render(request,"lostboard.html",context)
+# def foundboard(request):
+#     articles = Article.objects.filter(article_type='FND')
+#     context = {
+#         "articles":articles, "article_type":"found"
+#     }
+#     return render(request,"lostboard.html",context)
+# def reqboard(request):
+#     articles = Article.objects.filter(article_type='REQ')
+#     context = {
+#         "articles":articles, "article_type":"requests"
+#     }
+#     return render(request,"lostboard.html",context)
+# def sellboard(request):
+#     articles = Article.objects.filter(article_type='SLL')
+#     context = {
+#         "articles":articles, "article_type":"sell"
+#     }
+#     return render(request,"lostboard.html",context)
+# def giveboard(request):
+#     articles = Article.objects.filter(article_type='GIV')
+#     context = {
+#         "articles":articles, "article_type":"give away"
+#     }
+#     return render(request,"lostboard.html",context)
 def detail(request,id):
     #article = Article.objects.filter(id = id).first()   
     article = get_object_or_404(Article,id = id)
