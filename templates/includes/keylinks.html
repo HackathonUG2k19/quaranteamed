@@ -28,10 +28,10 @@
 <div class="kl-container">
     <a class="nav-link" href="{% url 'article:articles'  %}"><div class="kl-obj">All</div></a>
     <!-- <div class="kl-obj">All</div> -->
-    <a class="nav-link" href="{% url 'article:lostboard'  %}"><div class="kl-obj">Lost</div></a>
-    <a class="nav-link" href="{% url 'article:foundboard'  %}"><div class="kl-obj">Found</div></a>
-    <a class="nav-link" href="{% url 'article:reqboard'  %}"><div class="kl-obj">Requests</div></a>
-    <a class="nav-link" href="{% url 'article:giveboard'  %}"><div class="kl-obj">Give Aways</div></a>
-    <a class="nav-link" href="{% url 'article:sellboard'  %}"><div class="kl-obj">Sell</div></a>
+    <a class="nav-link" href="{% url 'article:type' 'lost' %}"><div class="kl-obj">Lost</div></a>
+    <a class="nav-link" href="{% url 'article:type' 'found'  %}"><div class="kl-obj">Found</div></a>
+    <a class="nav-link" href="{% url 'article:type' 'request'  %}"><div class="kl-obj">Requests</div></a>
+    <a class="nav-link" href="{% url 'article:type' 'give'  %}"><div class="kl-obj">Give Aways</div></a>
+    <a class="nav-link" href="{% url 'article:type' 'sell'  %}"><div class="kl-obj">Sell</div></a>
   
 </div>

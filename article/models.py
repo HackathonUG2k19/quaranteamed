@@ -2,11 +2,11 @@ from django.db import models
 from  django.conf import settings
 # Create your models here.
 TYPE_OPTIONS=(
-    ('LST','lost'),
-    ('FND','found'),
-    ('SLL','sell'),
-    ('GIV','give_away'),
-    ('REQ','request'),
+    ('lost','lost'),
+    ('found','found'),
+    ('sell','sell'),
+    ('give','give_away'),
+    ('request','request'),
 )
 class Article(models.Model):
     author = models.ForeignKey("auth.User",on_delete = models.CASCADE,verbose_name = "Author")
@@ -14,7 +14,7 @@ class Article(models.Model):
     content = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True,verbose_name="Created Date")
     article_image = models.FileField(blank = True,null = True,verbose_name="Image")
-    article_type = models.CharField(max_length=3,choices=TYPE_OPTIONS,default='REQ')
+    article_type = models.CharField(max_length=10,choices=TYPE_OPTIONS,default='request')
     resolved = models.BooleanField(default = False)
     deadline = models.DateTimeField(default=None,null=True)
     def get_likes(self):
