@@ -3,4 +3,4 @@
 *.sqlite3
 *.orig
 media/*
-env/*
+env/**
