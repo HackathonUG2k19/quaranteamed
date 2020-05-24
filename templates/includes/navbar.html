@@ -79,7 +79,6 @@ body {margin:0;font-family:Arial}
 <div class="topnav" id="myTopnav">
   <a href="{% url 'article:articles'  %}" class="heading">CollegeStuff</a>
 
-
   {% if request.user.is_authenticated %}
   <a class="links" href="{% url 'user:logout'  %}">Logout</a>
 
@@ -93,6 +92,7 @@ body {margin:0;font-family:Arial}
 </a>
 
 <a class="links" href="{% url  'user:notifs'  %}"><img src=" {% static 'img/bell.svg' %}" width="30px" height="30px"> </a>
+<a href="{% url 'article:dashboard' %}" class="links">Dashboard</a>
 
   {% else %}
   <a class="links" href="{% url 'user:login'  %}">Login</a>
