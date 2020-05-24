@@ -1,10 +1,11 @@
 
-from .forms import RegisterForm,LoginForm
+from .forms import RegisterForm,LoginForm, ProfileForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import login,authenticate,logout
 from django.shortcuts import render,HttpResponse,redirect,get_object_or_404,reverse
 from .models  import Profile, Notif
+from django.contrib.auth.decorators import login_required
 
 from django.contrib.auth import login,authenticate,logout,update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
@@ -86,4 +87,27 @@ def settingUser(request):
         return render(request,"dashboard.html",context)
 
     return redirect("index")
+@login_required
+def notifications(request):
+    notifs = Notif.objects.filter(user_reciever = request.user)
+    context ={
+        'notifs':notifs
+    }
+    return render(request,"notifications.html",context)
+@login_required(login_url = "user:login")
+def editprofile(request):
 
+    profile = request.user.profile
+
+    form = ProfileForm(request.POST or None,request.FILES or None,instance = profile)
+    if form.is_valid():
+        profile = form.save(commit=False)
+        
+        profile.user = request.user
+        profile.save()
+
+        messages.success(request," updated successfully")
+        return redirect("user:profile",request.user)
+
+
+    return render(request,"editprofile.html",{"form":form})
