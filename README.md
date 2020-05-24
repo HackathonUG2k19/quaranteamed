@@ -17,10 +17,12 @@ pip3 install virtualenv
 virtualenv env
 source env/bin/activate
 ```
-Install Dependencies 
+Install Dependencies and run script
 
 ```
 pip3 install -r requirements.txt
+chmod +x reset.sh
+./reset.sh
 ```
 
 Set Database (Make Sure you are in directory same as manage.py)
